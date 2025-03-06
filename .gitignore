@@ -1,0 +1,42 @@
+
+# Compilados e intermediarios de GHC
+*.hi
+*.o
+*.dyn_o
+*.dyn_hi
+
+# Directorios generados por Cabal
+/dist/
+/dist-newstyle/
+/cabal.sandbox.config
+/cabal.sandbox.config.d
+.sandboxes/
+cabal.project.local
+cabal.project.local~ 
+# Si usas cabal.project, también podría ser útil ignorar:
+# cabal.project.freeze
+
+# Directorios generados por Stack
+/.stack-work/
+
+# Archivos de binarios/ejecutables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Archivos de GHCi
+.ghci
+.ghc.environment.*
+
+# Otros archivos y directorios de caché o de entorno
+/.htesting/
+.terraform/
+*.aux
+
+# Si usas Visual Studio Code, puedes ignorar lo siguiente:
+.vscode/
+
+# En macOS
+.DS_Store
