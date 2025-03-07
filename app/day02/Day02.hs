@@ -1,10 +1,8 @@
-import System.IO
 import Data.List.Split (splitOn)
 
 readInput :: IO [(Int, Int, Char, [Char])]
 readInput = do
     contents <- readFile "app/day02/input"
-    -- let result = map read (lines contents)
     let result = map parseLine (lines contents)
     return [x | Just x <- result]
 
