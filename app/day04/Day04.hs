@@ -1,8 +1,12 @@
 import Data.List.Split (splitOn)
 
-readInput :: IO [String]
+readInput :: IO [[String]]
 readInput = do
     contents <- readFile "app/day04/input"
-    return splitOn "\n\n" contents
+    return (map words (splitOn "\n\n" contents))
 
+resolve1 :: [[String]] -> Int
+resolve1 list = length [ x | x <- list, correct_passport x]
 
+correct_passport :: [String] -> Bool
+correct_passport list = (length list) == 8 || ((length list) == 7)
