@@ -17,9 +17,12 @@ dropSame (x:xs)
     | x `elem`  xs = dropSame xs
     | otherwise = x : dropSame xs
 
+intersectAll :: Eq a => [[a]] -> [a]
+intersectAll [[]] = []
+intersectAll [l] = l
+intersectAll (l:l':ls) = intersectAll ((intersect l l') : ls)
+
 resolve2 :: [[String]] -> Int
 resolve2 list =
-    let flatenLists = map (\l -> foldl (++) "" l) list
-        intersectionList = 
-            map (\(total, l) -> foldl intersect (dropSame total) l) (zip (dropSame flatenLists) list) in
-        foldl (+) 0 (map length intersectionList)
+        let intersectionList = map intersectAll list in
+        foldl (+) 0 (map length (dropSame intersectionList))
