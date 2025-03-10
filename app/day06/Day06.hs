@@ -4,6 +4,7 @@ readInput :: IO [[String]]
 readInput = do
     contents <- readFile "app/day06/input"
     return (map (\s -> splitOn "\n" s) $ splitOn "\n\n" contents)
+    -- Poque split coge un ultimo salto de linea?
 
 resolve1 :: [[String]] -> Int
 resolve1 list = 
@@ -25,4 +26,4 @@ intersectAll (l:l':ls) = intersectAll ((intersect l l') : ls)
 resolve2 :: [[String]] -> Int
 resolve2 list =
         let intersectionList = map intersectAll list in
-        foldl (+) 0 (map length (dropSame intersectionList))
+        foldl (+) 0 (map length ( map dropSame intersectionList)) 
