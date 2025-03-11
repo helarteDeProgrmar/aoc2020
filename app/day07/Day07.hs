@@ -28,7 +28,7 @@ transSecond' (x:xs) =
     (ws !! 1 ++ " " ++ ws !! 2, read $ ws !! 0) : transSecond' xs
 
 resolve1 :: [(String, [(String, Int)])] -> Int
-resolve1 list = 
+resolve1 list =
     let dependencies = [(x,y) | (x, y') <- list, y <- [n | (n,_) <- y']] in
     countColors ["shiny gold"] dependencies []
 

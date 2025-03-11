@@ -18,7 +18,6 @@ resolve1 :: [(Int, Int, Char, String)] -> Int
 resolve1 list = length [ () | (start, end, char, string) <- list, 
                              let count = length $ filter (== char) string,
                              start <= count, count <= end ]
-                             
 
 resolve2 :: [(Int, Int, Char, String)] -> Int
 resolve2 list = length [ () | (start, end, char, string) <- list, 
