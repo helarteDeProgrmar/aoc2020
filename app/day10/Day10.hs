@@ -1,4 +1,5 @@
 import Data.List (sort)
+import Data.List.Split (splitOn)
 
 readInput :: IO [Int]
 readInput = do
@@ -25,9 +26,17 @@ resolve2 :: [Int] -> Int
 resolve2 l = 
     let sorted = sort l
         joltages = zipWith (-) sorted (0:sorted) in
-        product $ map combine $ map length $ splitAt [3] joltages 
+        product $ map combine $ map length $ splitOn [3] joltages 
 
 combine :: Int -> Int
-combine 0 -> 1
-combine 1 -> 2
-combine n -> 2^n
+-- combine 0 = 1
+-- combine 1 = 2
+-- combine 2 = 4
+-- combine n = combine (n-1) + combine (n-2) + combine (n-3)
+combine n = combines !! n
+
+combines :: [Int]
+combines = 1 : 2 : 4: zipWith3 sum3 combines (tail combines) (drop 2 combines)
+
+sum3 :: Num a => a -> a -> a -> a
+sum3 a b c = a + b + c
