@@ -24,9 +24,8 @@ correctPassport :: [(String, String)] -> Bool
 correctPassport list = 
     let requiredKeys = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
         keyPresent = map fst list
-    in length keyPresent == length requiredKeys 
+    in (length list == 8 || length list == 7)
         && all (\x -> x `elem` keyPresent) requiredKeys
-        && all (\x -> x `elem` requiredKeys) keyPresent
         && all validate list
 
 validate :: (String, String) -> Bool
