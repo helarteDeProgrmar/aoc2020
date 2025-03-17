@@ -1,0 +1,17 @@
+main :: IO (Int, Int)
+main = do
+    input <- readInput
+    let s1 = resolve1 input
+    let s2 = resolve2 input
+    return (s1, s2)
+
+readInput :: IO [String]
+readInput = do
+    content <- readFile "app/day11/input"
+    return (lines content)
+
+resolve1 :: [String] -> Int
+resolve1 l = 0
+
+resolve2 :: [String] -> Int
+resolve2 l = 0
