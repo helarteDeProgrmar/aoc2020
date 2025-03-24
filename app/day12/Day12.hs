@@ -1,0 +1,32 @@
+main :: IO ()
+main = do
+    input <- readInput
+    let s1 = resolve1 input (0, 0) 0
+    let s2 = resolve2 input
+    print (s1, s2)
+
+readInput :: IO [(Char, Int)]
+readInput = do
+    contents <- readFile "app/day12/input"
+    return (map (\(x : xs) -> (x, read xs)) $ lines contents)
+
+resolve1 :: [(Char, Int)] -> (Int, Int) -> Int -> Int
+resolve1 [] (x, y) _ = abs (x) + abs (y)
+resolve1 ((i, mount) : xs) (x, y) o
+    | i == 'N' = resolve1 xs (x, y + mount) o
+    | i == 'S' = resolve1 xs (x, y - mount) o
+    | i == 'E' = resolve1 xs (x + mount, y) o
+    | i == 'W' = resolve1 xs (x - mount, y) o
+    | i == 'L' = resolve1 xs (x, y) (rem (o + mount) 360)
+    | i == 'R' = resolve1 xs (x, y) (rem (o + 360 - mount) 360)
+    | i == 'F' =
+        case o of
+            0 -> resolve1 xs (x + mount, y) o
+            90 -> resolve1 xs (x, y + mount) o
+            180 -> resolve1 xs (x - mount, y) o
+            270 -> resolve1 xs (x, y - mount) o
+            _ -> error "Orientación inválida"
+    | otherwise = error (i : " con inclinacion")
+
+resolve2 :: [(Char, Int)] -> Int
+resolve2 l = 0
