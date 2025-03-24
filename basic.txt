@@ -1,9 +1,9 @@
-main :: IO (Int, Int)
+main :: IO ()
 main = do
     input <- readInput
     let s1 = resolve1 input
     let s2 = resolve2 input
-    return (s1, s2)
+    print (s1, s2)
 
 readInput :: IO [String]
 readInput = do
@@ -11,7 +11,7 @@ readInput = do
     return (lines content)
 
 resolve1 :: [String] -> Int
-resolve1 l = 0
+resolve1 _ = 0
 
 resolve2 :: [String] -> Int
-resolve2 l = 0
+resolve2 _ = 0
