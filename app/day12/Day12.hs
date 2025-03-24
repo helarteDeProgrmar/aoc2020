@@ -25,8 +25,8 @@ resolve1 ((i, mount) : xs) (x, y) o
             90 -> resolve1 xs (x, y + mount) o
             180 -> resolve1 xs (x - mount, y) o
             270 -> resolve1 xs (x, y - mount) o
-            _ -> error "Orientación inválida"
-    | otherwise = error (i : " con inclinacion")
+            _ -> error "rare rotating"
+    | otherwise = error (i : "instruction not macht")
 
 resolve2 :: [(Char, Int)] -> Int
 resolve2 l = 0
