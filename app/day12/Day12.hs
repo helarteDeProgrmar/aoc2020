@@ -2,7 +2,7 @@ main :: IO ()
 main = do
     input <- readInput
     let s1 = resolve1 input (0, 0) 0
-    let s2 = resolve2 input
+    let s2 = resolve2 input (0,0) (10,1)
     print (s1, s2)
 
 readInput :: IO [(Char, Int)]
@@ -28,5 +28,26 @@ resolve1 ((i, mount) : xs) (x, y) o
             _ -> error "rare rotating"
     | otherwise = error (i : "instruction not macht")
 
-resolve2 :: [(Char, Int)] -> Int
-resolve2 l = 0
+resolve2 :: [(Char, Int)] -> (Int, Int) -> (Int,Int) -> Int
+resolve2 [] (x, y) _ = abs (x) + abs (y)
+resolve2 ((i, mount) : xs) (x, y) (u,v)
+    | i == 'N' = resolve2 xs (x, y) (u, v + mount)
+    | i == 'S' = resolve2 xs (x, y) (u, v - mount)
+    | i == 'E' = resolve2 xs (x , y) (u + mount, v)
+    | i == 'W' = resolve2 xs (x , y) (u - mount, v)
+    | i == 'R' = 
+        case mount of
+            0 -> resolve2 xs (x, y) (u, v)
+            90 -> resolve2 xs (x, y) (v, -u)
+            180 -> resolve2 xs (x, y) (-u, -v)
+            270 -> resolve2 xs (x, y) (-v, u)
+            _ -> error "rare rotating"
+    | i == 'L' =
+        case mount of
+            0 -> resolve2 xs (x, y) (u, v)
+            90 -> resolve2 xs (x, y) (-v, u)
+            180 -> resolve2 xs (x, y) (-u, -v)
+            270 -> resolve2 xs (x, y) (v, -u)
+            _ -> error "rare rotating"
+    | i == 'F' = resolve2 xs (x+(mount*u), y+(mount*v)) (u,v)
+    | otherwise = error (i : "instruction not macht")
