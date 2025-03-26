@@ -1,20 +1,23 @@
 import Data.Char (intToDigit)
 import Numeric (showIntAtBase)
-
+import qualified Data.Map.Strict as Map
 main :: IO ()
 main = do
     input <- readInput
-    let s1 = resolve1 input
+    let s1 = resolve1 input Map.empty ""
     let s2 = resolve2 input
     print (s1, s2)
 
 readInput :: IO [String]
 readInput = do
-    content <- readFile "app/day11/input"
-    return (lines content)
+    content <- readFile "app/day14/input"
+    return (map words $ lines content)
 
-resolve1 :: [String] -> Int
-resolve1 _ = 0
+resolve1 :: [[String]] -> Map.Map -> String -> Int
+resolve1 (["mask", _, m],xs) mem mask = resolve1 xs mem m
+resolve1 ([cmd,_, n],xs) mem mask = resolve1 xs newMem mask
+    where newMem = mem.insert nn (opMask ) mem
+    nn = toBinary36 $ read n
 
 resolve2 :: [String] -> Int
 resolve2 _ = 0
