@@ -69,7 +69,8 @@ executable aoc2020
     -- Other library packages from which modules are imported.
     build-depends:    base >= 4.17 && < 4.19,
                       split,
-                      safe
+                      safe,
+                      containers
     -- Directories containing source files.
     hs-source-dirs:   app
 
