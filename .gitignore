@@ -40,3 +40,7 @@ cabal.project.local~
 
 # En macOS
 .DS_Store
+
+
+# scripts with sensible data
+automatice.sh
